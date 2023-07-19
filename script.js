@@ -42,19 +42,13 @@ colorChose.forEach((color) => {
 
 const pixels = document.querySelectorAll('.pixel');
 
-pixels.forEach((colorBack) => {
-  colorBack.addEventListener('click', () => {
-    const pixelSelected = document.querySelector('.selected');
-    const changeColor = getComputedStyle(pixelSelected).backgroundColor;
-    colorBack.style.backgroundColor = changeColor;
-  });
-});
 
 const findButton = document.getElementById('clear-board');
 const clearPixel = () => {
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].style.backgroundColor = 'white';
   }
+  localStorage.clear('pixelBoard');
 };
 
 findButton.addEventListener('click', clearPixel);
@@ -70,3 +64,39 @@ const randomColor = () => {
   }
 };
 findRandomButton.addEventListener('click', randomColor);
+
+const saveDrawing = () => {
+  const drawing = [];
+
+  for (let index = 0; index < pixels.length; index += 1) {
+    const pixel = pixels[index];
+    const color = getComputedStyle(pixel).backgroundColor;
+    drawing.push({ index, color });
+  }
+
+  localStorage.setItem('pixelBoard', JSON.stringify(drawing));
+};
+
+const loadDrawing = () => {
+  const savedDrawing = localStorage.getItem('pixelBoard');
+
+  if (savedDrawing) {
+    const drawing = JSON.parse(savedDrawing);
+
+    for (let index = 0; index < drawing.length; index += 1) {
+      const pixel = drawing[index];
+      pixels[pixel.index].style.backgroundColor = pixel.color;
+    }
+  }
+};
+
+pixels.forEach((colorBack) => {
+  colorBack.addEventListener('click', () => {
+    const pixelSelected = document.querySelector('.selected');
+    const changeColor = getComputedStyle(pixelSelected).backgroundColor;
+    colorBack.style.backgroundColor = changeColor;
+    saveDrawing();
+  });
+});
+
+window.addEventListener('DOMContentLoaded', loadDrawing);
