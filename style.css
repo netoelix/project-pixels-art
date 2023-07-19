@@ -3,6 +3,12 @@
     margin: 0px;
     border: 0px;
 }
+#clear-board p {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 100px;
+    background-color: white;
+}
 .color {
     border: 1px solid black;
     padding: 30px;

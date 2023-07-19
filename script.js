@@ -5,6 +5,13 @@ colorPalet[1].style.backgroundColor = 'red';
 colorPalet[2].style.backgroundColor = 'green';
 colorPalet[3].style.backgroundColor = 'yellow';
 
+const clearButton = document.getElementById('clear-board');
+const newButton = document.createElement('button');
+const newTextButton = document.createElement('p');
+clearButton.appendChild(newButton);
+newButton.appendChild(newTextButton);
+newTextButton.innerText = 'Limpar';
+
 const creatPixel = () => {
   for (let index = 0; index < 25; index += 1) {
     const pixelPainel = document.getElementById('pixel-board');
@@ -35,3 +42,12 @@ pixels.forEach((colorBack) => {
     colorBack.style.backgroundColor = changeColor;
   });
 });
+
+const findButton = document.getElementById('clear-board');
+const clearPixel = () => {
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].style.backgroundColor = 'white';
+  }
+};
+
+findButton.addEventListener('click', clearPixel);
