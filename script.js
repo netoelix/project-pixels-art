@@ -25,3 +25,13 @@ colorChose.forEach((color) => {
     color.classList.add('selected');
   });
 });
+
+const pixels = document.querySelectorAll('.pixel');
+
+pixels.forEach((colorBack) => {
+  colorBack.addEventListener('click', () => {
+    const pixelSelected = document.querySelector('.selected');
+    const changeColor = getComputedStyle(pixelSelected).backgroundColor;
+    colorBack.style.backgroundColor = changeColor;
+  });
+});
