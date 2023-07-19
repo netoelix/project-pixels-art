@@ -14,3 +14,14 @@ const creatPixel = () => {
   }
 };
 creatPixel();
+
+const colorChose = document.querySelectorAll('.color');
+
+colorChose.forEach((color) => {
+  color.addEventListener('click', () => {
+    colorChose.forEach((item) => {
+      item.classList.remove('selected');
+    });
+    color.classList.add('selected');
+  });
+});
