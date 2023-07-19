@@ -12,6 +12,13 @@ clearButton.appendChild(newButton);
 newButton.appendChild(newTextButton);
 newTextButton.innerText = 'Limpar';
 
+const randomButton = document.getElementById('button-random-color');
+const newRandomButton = document.createElement('button');
+const newTextRandom = document.createElement('p');
+randomButton.appendChild(newRandomButton);
+newRandomButton.appendChild(newTextRandom);
+newTextRandom.innerText = 'Cores aleatórias';
+
 const creatPixel = () => {
   for (let index = 0; index < 25; index += 1) {
     const pixelPainel = document.getElementById('pixel-board');
@@ -51,3 +58,15 @@ const clearPixel = () => {
 };
 
 findButton.addEventListener('click', clearPixel);
+
+const findRandomButton = document.getElementById('button-random-color');
+
+const randomColor = () => {
+  for (let index = 0; index < colorPalet.length; index += 1) {
+    const colorFirsth = Math.trunc(Math.random(256) * 100);
+    const colorSecond = Math.trunc(Math.random(256) * 100);
+    const colorThird = Math.trunc(Math.random(256) * 100);
+    colorPalet[index].style.backgroundColor = `rgb(${colorFirsth}, ${colorSecond}, ${colorThird})`;
+  }
+};
+findRandomButton.addEventListener('click', randomColor);

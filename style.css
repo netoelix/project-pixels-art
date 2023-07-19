@@ -3,11 +3,19 @@
     margin: 0px;
     border: 0px;
 }
-#clear-board p {
+#clear-board {
     padding: 10px;
     border: 1px solid black;
     border-radius: 100px;
     background-color: white;
+    display: inline-block;
+}
+#button-random-color {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 100px;
+    background-color: white;
+    display: inline-block;
 }
 .color {
     border: 1px solid black;
