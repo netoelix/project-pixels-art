@@ -80,13 +80,17 @@ const saveDrawing = () => {
 const loadDrawing = () => {
   const savedDrawing = localStorage.getItem('pixelBoard');
 
-  if (savedDrawing) {
-    const drawing = JSON.parse(savedDrawing);
+  let drawing = [];
 
-    for (let index = 0; index < drawing.length; index += 1) {
-      const pixel = drawing[index];
-      pixels[pixel.index].style.backgroundColor = pixel.color;
-    }
+  if (savedDrawing) {
+    drawing = JSON.parse(savedDrawing);
+  } else {
+    localStorage.setItem('pixelBoard', JSON.stringify(drawing));
+  }
+
+  for (let index = 0; index < drawing.length; index += 1) {
+    const pixel = drawing[index];
+    pixels[pixel.index].style.backgroundColor = pixel.color;
   }
 };
 
