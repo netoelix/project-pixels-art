@@ -30,6 +30,7 @@ const creatPixel = () => {
 creatPixel();
 
 const colorChose = document.querySelectorAll('.color');
+let selectedColor = null;
 
 colorChose.forEach((color) => {
   color.addEventListener('click', () => {
@@ -37,11 +38,25 @@ colorChose.forEach((color) => {
       item.classList.remove('selected');
     });
     color.classList.add('selected');
+    selectedColor = color;
   });
 });
 
 const pixels = document.querySelectorAll('.pixel');
 
+const savePixelColor = (pixel) => {
+  const pixelColor = getComputedStyle(selectedColor).backgroundColor;
+  pixel.style.backgroundColor = pixelColor;
+};
+
+pixels.forEach((pixel) => {
+  pixel.addEventListener('click', () => {
+    if (selectedColor !== null) {
+      savePixelColor(pixel);
+      saveDrawing();
+    }
+  });
+});
 
 const findButton = document.getElementById('clear-board');
 const clearPixel = () => {
@@ -93,14 +108,5 @@ const loadDrawing = () => {
     pixels[pixel.index].style.backgroundColor = pixel.color;
   }
 };
-
-pixels.forEach((colorBack) => {
-  colorBack.addEventListener('click', () => {
-    const pixelSelected = document.querySelector('.selected');
-    const changeColor = getComputedStyle(pixelSelected).backgroundColor;
-    colorBack.style.backgroundColor = changeColor;
-    saveDrawing();
-  });
-});
 
 window.addEventListener('DOMContentLoaded', loadDrawing);
