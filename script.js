@@ -19,15 +19,25 @@ randomButton.appendChild(newRandomButton);
 newRandomButton.appendChild(newTextRandom);
 newTextRandom.innerText = 'Cores aleatórias';
 
-const creatPixel = () => {
-  for (let index = 0; index < 25; index += 1) {
-    const pixelPainel = document.getElementById('pixel-board');
+const changeButtonSize = document.getElementById('generate-board');
+
+const creatPixel = (number) => {
+  const pixelPainel = document.getElementById('pixel-board');
+  const newNumber = number * number;
+  pixelPainel.style.width = `${number * 42}px`;
+
+  const pixelsToRemove = pixelPainel.querySelectorAll('.pixel');
+  pixelsToRemove.forEach((pixel) => {
+    pixelPainel.removeChild(pixel);
+  });
+
+  for (let index = 0; index < newNumber; index += 1) {
     const newElementPixel = document.createElement('div');
     newElementPixel.className = 'pixel';
     pixelPainel.appendChild(newElementPixel);
   }
 };
-creatPixel();
+creatPixel(5);
 
 const colorChose = document.querySelectorAll('.color');
 let selectedColor = null;
@@ -110,3 +120,21 @@ const loadDrawing = () => {
 };
 
 window.addEventListener('DOMContentLoaded', loadDrawing);
+
+const sizeBox = () => {
+  const changeSizeBox = document.getElementById('board-size');
+  const inputValue = parseInt(changeSizeBox.value, 10);
+
+  if (isNaN(inputValue)) {
+    alert('Board inválido!');
+    return;
+  }
+
+  const clampedValue = clamp(inputValue, 5, 50);
+  creatPixel(clampedValue);
+};
+
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+
+changeButtonSize.addEventListener('click', sizeBox);

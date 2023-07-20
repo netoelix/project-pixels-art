@@ -2,20 +2,30 @@
     text-align: center;
     margin: 0px;
     border: 0px;
+    background-color: rgb(27, 47, 63);
+    color: white;
+    text-transform: uppercase;
+    font-family: sans-serif;
 }
 #clear-board {
     padding: 10px;
     border: 1px solid black;
     border-radius: 100px;
-    background-color: white;
+    background-color: black;
     display: inline-block;
 }
 #button-random-color {
     padding: 10px;
     border: 1px solid black;
     border-radius: 100px;
-    background-color: white;
+    background-color: black;
     display: inline-block;
+}
+button {
+    background-color: black;
+}
+p {
+    background-color: black;
 }
 .color {
     border: 1px solid black;
@@ -27,7 +37,6 @@
 #pixel-board {
     margin-top: 20px;
     border: 1px solid black;
-    width: 210px;
     display: inline-block;
 }
 .pixel {
@@ -36,4 +45,5 @@
     width: 40px;
     height: 40px;
     display: inline-block;
+    vertical-align: bottom;
 }
