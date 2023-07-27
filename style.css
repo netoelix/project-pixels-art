@@ -23,6 +23,12 @@
 }
 button {
     background-color: black;
+    border-radius: 100px;
+}
+#board-size {
+    margin-top: 15px;
+    background-color: gray;
+    border-radius: 100px;
 }
 p {
     background-color: black;
@@ -46,4 +52,10 @@ p {
     height: 40px;
     display: inline-block;
     vertical-align: bottom;
+}
+footer {
+    background-color: black;
+    position: fixed;
+    width: 100%;
+    top: 97.5%;
 }

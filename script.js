@@ -52,6 +52,16 @@ colorChose.forEach((color) => {
   });
 });
 
+const pixelBoard = document.getElementById('pixel-board');
+
+pixelBoard.addEventListener('click', (event) => {
+  const clickedPixel = event.target;
+  if (selectedColor !== null && clickedPixel.classList.contains('pixel')) {
+    savePixelColor(clickedPixel);
+    saveDrawing();
+  }
+});
+
 const pixels = document.querySelectorAll('.pixel');
 
 const savePixelColor = (pixel) => {
@@ -59,32 +69,23 @@ const savePixelColor = (pixel) => {
   pixel.style.backgroundColor = pixelColor;
 };
 
-pixels.forEach((pixel) => {
-  pixel.addEventListener('click', () => {
-    if (selectedColor !== null) {
-      savePixelColor(pixel);
-      saveDrawing();
-    }
-  });
-});
-
-const findButton = document.getElementById('clear-board');
 const clearPixel = () => {
-  for (let index = 0; index < pixels.length; index += 1) {
-    pixels[index].style.backgroundColor = 'white';
+  const newPixels = document.querySelectorAll('.pixel');
+  for (let index = 0; index < newPixels.length; index += 1) {
+    newPixels[index].style.backgroundColor = 'white';
   }
   localStorage.clear('pixelBoard');
 };
 
-findButton.addEventListener('click', clearPixel);
+clearButton.addEventListener('click', clearPixel);
 
 const findRandomButton = document.getElementById('button-random-color');
 
 const randomColor = () => {
   for (let index = 0; index < colorPalet.length; index += 1) {
-    const colorFirsth = Math.trunc(Math.random(256) * 100);
-    const colorSecond = Math.trunc(Math.random(256) * 100);
-    const colorThird = Math.trunc(Math.random(256) * 100);
+    const colorFirsth = Math.trunc(Math.random() * 256);
+    const colorSecond = Math.trunc(Math.random() * 256);
+    const colorThird = Math.trunc(Math.random() * 256);
     colorPalet[index].style.backgroundColor = `rgb(${colorFirsth}, ${colorSecond}, ${colorThird})`;
   }
 };
@@ -113,9 +114,13 @@ const loadDrawing = () => {
     localStorage.setItem('pixelBoard', JSON.stringify(drawing));
   }
 
-  for (let index = 0; index < drawing.length; index += 1) {
-    const pixel = drawing[index];
-    pixels[pixel.index].style.backgroundColor = pixel.color;
+  if (drawing.length >= pixels.length) {
+    for (let index = 0; index < pixels.length; index += 1) {
+      const pixel = drawing[index];
+      pixels[index].style.backgroundColor = pixel.color;
+    }
+  } else {
+    clearPixel();
   }
 };
 
@@ -135,6 +140,5 @@ const sizeBox = () => {
 };
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
 
 changeButtonSize.addEventListener('click', sizeBox);
